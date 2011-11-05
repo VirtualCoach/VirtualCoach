@@ -1,7 +1,7 @@
 <?php 
 
-$title = "Training predictions adapted to your workout history";
-$page = "home";
+$title = "Contact Us";
+$page = "contact";
 
 require("global_header.php");
 

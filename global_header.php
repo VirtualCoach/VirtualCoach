@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>Virtual Coach | <?php echo $title; ?></title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -32,17 +32,25 @@
 	<div class="topbar">
 		<div class="fill">
 			<div class="container">
-				<a class="brand" href="#">Virtual Coach</a>
+				<a class="brand" href="./">Virtual Coach</a>
 				<ul class="nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
+					<?php if ($page == "home") { echo "<li class='active'>";} else { echo "<li>"; } ?><a href="./">Home</a></li>
+					<?php if ($page == "about") { echo "<li class='active'>";} else { echo "<li>"; } ?><a href="about">About</a></li>
+					<?php if ($page == "contact") { echo "<li class='active'>";} else { echo "<li>"; } ?><a href="contact">Contact</a></li>
 				</ul>
+				<?php if (!$SESSION["is_logged_in"]):?>
 				<form action="" class="pull-right">
 					<input class="input-small" type="text" placeholder="Username">
 					<input class="input-small" type="password" placeholder="Password">
 					<button class="btn" type="submit">Sign in</button>
 				</form>
+				<?php else: ?>
+				<ul class="nav secondary-nav">
+					<li><a href="dashboard">Dashboard</a></li>
+					<li><a href="account">Account</a></li>
+					<li><a href="logout">Logout</a></li>
+				</ul>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
