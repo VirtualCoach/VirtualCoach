@@ -9,8 +9,8 @@ require("global_header.php");
 	<div class="container">
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-		<div class="span6">
-			Test
+		<div class="span8 pull-left">
+			<div id="home_chart" style="width: 100%; height: 400px"></div>
 		</div>
 		<div class="span6 pull-right">
 			<h2>Training predictions adapted to <i>your</i> workout history</h2>
@@ -33,7 +33,7 @@ require("global_header.php");
         <div class="span-one-third">
           <h2>Why?</h2>
           <p>Personal trainers are expensive and typically are not well-qualified. See real results at a lower cost simply by interacting with Virtual Coach. Join this exciting network of cyclists and change your cycling today.</p>
-          <p><a class="btn" href="signup">Signup &raquo;</a></p>
+          <p><a class="btn" href="signup">Sign Up &raquo;</a></p>
         </div>
       </div>
 <?php require("global_footer.php"); ?>
