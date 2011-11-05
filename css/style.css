@@ -31,6 +31,14 @@ a#logo {
 	float: left;
 }
 
+input.error {
+	outline:0;
+	border-color:#EE5F5B;
+	-webkit-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1),0 0 8px #EE5F5B;
+	-moz-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1),0 0 8px #EE5F5B;
+	box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1),0 0 8px #EE5F5B;
+}
+
 footer {
 	border-top: 1px solid #AAA;
 }

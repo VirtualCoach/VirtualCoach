@@ -38,20 +38,34 @@
 					<?php if ($page == "about") { echo "<li class='active'>";} else { echo "<li>"; } ?><a href="about">About</a></li>
 					<?php if ($page == "contact") { echo "<li class='active'>";} else { echo "<li>"; } ?><a href="contact">Contact</a></li>
 				</ul>
-				<?php if (!$SESSION["is_logged_in"]):?>
-				<form action="" class="pull-right">
-					<input class="input-small" type="text" placeholder="Username">
-					<input class="input-small" type="password" placeholder="Password">
+				<?php if (!$user->is_logged_in()):?>
+				<form action="classes/login.php" method="post" class="pull-right">
+					<input class="input-small <?php if ($e == 'login') echo 'error'; ?>" name="username" type="text" placeholder="Username">
+					<input class="input-small <?php if ($e == 'login') echo 'error'; ?>" name="password" type="password" placeholder="Password">
 					<button class="btn" type="submit">Sign in</button>
 				</form>
 				<?php else: ?>
 				<ul class="nav secondary-nav">
-					<li><a href="dashboard">Dashboard</a></li>
-					<li><a href="account">Account</a></li>
-					<li><a href="logout">Logout</a></li>
+					<?php if ($page == "dashboard") { echo "<li class='active'>";} else { echo "<li>"; } ?><a href="dashboard">Dashboard</a></li>
+					<li class="dropdown" data-dropdown="dropdown" >
+					    <a href="#" class="dropdown-toggle"><?php echo $_SESSION['user']; ?></a>
+					    <ul class="dropdown-menu">
+					      <li><a href="account">Account Settings</a></li>
+					      <li class="divider"></li>
+					      <li><a href="classes/logout">Logout</a></li>
+					    </ul>
+					  </li>
 				</ul>
 				<?php endif; ?>
 			</div>
 		</div>
 	</div>
     
+<?php if ($e == 'login'): ?>
+	<div class="container">
+		<div class="alert-message error">
+		  <a class="close" href="#">×</a>
+		  <p><strong>Holy guacamole!</strong> Best check yo self, you’re login was incorrect.</p>
+		</div>
+	</div>
+<? endif; ?>

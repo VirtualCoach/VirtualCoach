@@ -9,27 +9,31 @@ require("global_header.php");
 	<div class="container">
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-        <h1>Hello, world!</h1>
-        <p>Vestibulum id ligula porta felis euismod semper. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-        <p><a class="btn primary large">Learn more &raquo;</a></p>
+		<div class="span6">
+			Test
+		</div>
+		<div class="span6 pull-right">
+			<h2>Training predictions adapted to <i>your</i> workout history</h2>
+			<p>Virtual Coach provides personalized training recommendations and is the easiest way to get advice and predictions to deliver real results.</p>
+			<p><a href="signup" class="btn large success">Sign Up Now &raquo;</a></p>
+		</div>
+		<div class="clearfix"></div>
       </div>
 
       <!-- Example row of columns -->
-      <div class="row">
-        <div class="span6">
-          <h2>Heading</h2>
-          <p>Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
+      <div class="row home_boxes">
+        <div class="span-one-third">
+          <h2>What?</h2>
+          <p>Virtual Coach provides personalized training recommendations for professional and amateur cyclists. It aims to deliver succinct and functional training advice and predictions to deliver real results.</p>
         </div>
-        <div class="span5">
-          <h2>Heading</h2>
-           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
+        <div class="span-one-third">
+          <h2>How?</h2>
+           <p>Training predictions are adapted from your workout history, which is collected on your bicycle in real time via your Power Meter device. Metrics are presented in a convenient and easy to understand format, while predictions are generated based on a sophisticated machine learning algorithm.</p>
        </div>
-        <div class="span5">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
+        <div class="span-one-third">
+          <h2>Why?</h2>
+          <p>Personal trainers are expensive and typically are not well-qualified. See real results at a lower cost simply by interacting with Virtual Coach. Join this exciting network of cyclists and change your cycling today.</p>
+          <p><a class="btn" href="signup">Signup &raquo;</a></p>
         </div>
       </div>
 <?php require("global_footer.php"); ?>
