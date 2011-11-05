@@ -9,7 +9,7 @@ require("global_header.php");
 	<div class="container">
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-        <h3>Signup</h3>
+        <h2>You're just seconds away from a better workout!<br /><br /></h2>
 		<form action="classes/signup.php" method="post">
 		<div class="clearfix <?php if ($e == 'email') echo 'error'; ?>">
 			<label for="xlInput">Email</label>
@@ -48,6 +48,7 @@ require("global_header.php");
 			</div>
 		</div>
 		<div class="actions">
+			<p class="psmall">I agree to the <a href="terms">terms of service</a> and <a href="privacy">privacy policy</a>.</p>
 			<input type="submit" class="btn primary" value="Create my account">
         </div>
 		</form>

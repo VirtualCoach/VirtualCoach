@@ -5,6 +5,14 @@ require_once("mysql.php");
 
 class User {
 	
+	public function set_error($e) {
+		$_SESSION['e'] = $e;
+	}
+
+	public function unset_error() {
+		unset($_SESSION['e']);
+	}
+	
 	public function log_in($username, $pword) {
 		
 		$mysql = new Mysql();
@@ -12,12 +20,12 @@ class User {
 		$valid_user = $mysql->validate_user($username, $pword);
 		
 		if ($valid_user) {
-			unset_error();
+			$this->unset_error();
 			$_SESSION['status'] = 'authorized';
 			$_SESSION['user'] = $username;
 			header("Location: ../dashboard");
 		} else {
-			set_error("login");
+			$this->set_error("login");
 			header("Location: ../");
 		}
 	}
@@ -28,15 +36,15 @@ class User {
 		$user_create = $mysql->new_user($username, $pword, $email);
 		
 		if($user_create == "success") {
-			unset_error();
+			$this->unset_error();
 			$_SESSION['status'] = 'authorized';
 			$_SESSION['user'] = $username;
 			header("Location: ../dashboard");
 		} else if ($user_create == "email") {
-			set_error("email");
+			$this->set_error("email");
 			header("Location: ../signup");
 		} else if ($user_create == "username") {
-			set_error("username");
+			$this->set_error("username");
 			header("Location: ../signup");
 		} else {
 			set_error("unknown");
@@ -62,6 +70,10 @@ class User {
 	
 	public function is_logged_in() {
 		return $_SESSION['status'] == 'authorized';
+	}
+	
+	public function require_login() {
+		if (!$this->is_logged_in()) header("Location: ./");
 	}
 }
 

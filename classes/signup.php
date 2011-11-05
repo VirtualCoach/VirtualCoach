@@ -10,7 +10,7 @@ $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 $cpassword = filter_var($_POST['cpassword'], FILTER_SANITIZE_STRING);
 
 if ($password != $cpassword) {
-	set_error("passwords");
+	$user->set_error("passwords");
 	header("Location: ../signup");
 	die();
 }

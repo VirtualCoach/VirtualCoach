@@ -1,6 +1,6 @@
 <?php
 
-require("User.php");
+require_once("User.php");
 $user = new User();
 
 $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);

@@ -48,6 +48,7 @@
 	<script defer src="js/mylibs/modules/exporting.js"></script>
 	
 	<script defer src="js/script.js"></script>
+	<script defer src="js/<?php echo $page; ?>.js"></script>
 	<!-- end scripts-->
 
 
