@@ -21,6 +21,7 @@ class User {
 		
 		if ($valid_user) {
 			$this->unset_error();
+			$this->get_uid($username);
 			$_SESSION['status'] = 'authorized';
 			$_SESSION['user'] = $username;
 			header("Location: ../dashboard");
@@ -37,9 +38,10 @@ class User {
 		
 		if($user_create == "success") {
 			$this->unset_error();
+			$this->get_uid($username);
 			$_SESSION['status'] = 'authorized';
 			$_SESSION['user'] = $username;
-			header("Location: ../dashboard");
+			header("Location: ../information");
 		} else if ($user_create == "email") {
 			$this->set_error("email");
 			header("Location: ../signup");
@@ -64,8 +66,19 @@ class User {
 		if(isset($_SESSION['user'])) {
 			unset($_SESSION['user']);
 		}
+		if(isset($_SESSION['uid'])) {
+			unset($_SESSION['uid']);
+		}
 		
 		header("Location: ../");
+	}
+	
+	public function get_uid($username) {
+		$mysql = new Mysql();
+		
+		$uid = $mysql->get_user_id($username);
+		$_SESSION['uid'] = $uid;
+		return $uid;
 	}
 	
 	public function is_logged_in() {

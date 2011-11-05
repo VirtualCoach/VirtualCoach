@@ -1,5 +1,8 @@
 <?php
 
+require_once("../api/CSV_Handler.php");
+$csvh = new CSV_Handler();
+
 /**
  * Handle file uploads via XMLHttpRequest
  */
@@ -22,8 +25,11 @@ class qqUploadedFileXhr {
         fseek($temp, 0, SEEK_SET);
         stream_copy_to_stream($temp, $target);
         fclose($target);
-        
-        return true;
+		return true;
+		/*if ($csvh->validate($target)) {
+			return true;
+		}
+        return false;*/
     }
     function getName() {
         return $_GET['qqfile'];
@@ -143,7 +149,13 @@ class qqFileUploader {
         }
         
         if ($this->file->save($uploadDirectory . $filename . '.' . $ext)){
-            return array('success'=>true);
+			return array('success'=>true);
+			/*if ($csvh->validate($filename . '.' . $ext)) {
+				return array('success'=>true);
+			} else {
+				return array('error' => 'File has an invalid format.');
+			}*/
+            
         } else {
             return array('error'=> 'Could not save uploaded file.' .
                 'The upload was cancelled, or server error encountered');

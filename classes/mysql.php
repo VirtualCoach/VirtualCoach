@@ -22,6 +22,18 @@ class Mysql {
 		return hash('sha512', $pass.$salt);
 	}
 	
+	public function get_user_id($username) {
+		global $mysqli;
+		
+		$stmt = $mysqli->prepare("SELECT id FROM users WHERE username = ? LIMIT 1");
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+		$stmt->bind_result($rid);
+		$stmt->fetch();
+		$stmt->close();
+		return $rid;
+	}
+	
 	public function validate_user($username, $pword) {
 		global $mysqli;
 		$stmt = $mysqli->prepare("SELECT id FROM users WHERE username = ? AND password = ? LIMIT 1");
