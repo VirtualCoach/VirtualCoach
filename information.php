@@ -69,6 +69,7 @@ require("global_header.php");
 			<div class="clearfix"></div>
         </div>
 		<div class="actions">
+			<input type="hidden" id="myfile" name="myfile" value="">
 			<input type="submit" class="btn success large" value="Finish">
         </div>
 		</form>

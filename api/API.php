@@ -6,42 +6,59 @@ require_once("mysql.php");
 class API {
 	
 	private $uid;
-	private $mysql;
 	
 	public function __construct($uid) {
-		global $mysqli;
 		$this->uid = $uid;
-		$this->mysql = $mysqli;
 		
 		// possibly load all of the customer's data
 	}
 	
-	public function getSingleMetric($colname) {
+	public function getSingleMetric($colname, $points) {
+		global $mysqli;
+		
 		$data = array();
-		$stmt = $this->mysql->prepare("SELECT ? FROM data WHERE uid = ? LIMIT 40");
-		$stmt->bind_param("si", $colname, $this->uid);
+		$stmt = $mysqli->prepare("SELECT ".$colname." FROM data WHERE uid = ?");
+		$stmt->bind_param("i", $this->uid);
 		$stmt->execute();
-		$stmt->bind_result($p);
-
-		while ($stmt->fetch()) { 
-			$data[] = $p;
+		$stmt->store_result();
+		$mod_val = $stmt->num_rows / $points;
+		$stmt->bind_result($br);
+		
+		$i = 1;
+		$cur = 0;
+		while ($stmt->fetch()) {
+			$cur += $br;
+			if ($i % $mod_val == 0) {
+				$data[] = round($cur/$mod_val, 3);
+				$cur = 0;
+			}
+			$i++;
 		}
 		$stmt->close();
 
 		return json_encode($data);
 	}
 	
-	public function getMetricOverMetric($top, $bottom) {
+	public function getMetricOverMetric($top, $bottom, $points) {
+		global $mysqli;
 		$data = array();
-		$stmt = $this->mysql->prepare("SELECT ?, ? FROM data WHERE uid = ? LIMIT 40");
-		$stmt->bind_param("ssi", $top, $bottom, $this->uid);
-		$stmt->execute();
-		$stmt->bind_result($p, $q);
-
-		while ($stmt->fetch()) { 
-			$data[] = $p/$q;
+		
+		$query = "SELECT ".$top.",".$bottom." FROM data WHERE uid = ".$this->uid;
+		$result = $mysqli->query($query);
+		
+		$mod_val = $result->num_rows / $points;
+		
+		$i = 1;
+		$cur = 0;
+		while($row = $result->fetch_array(MYSQLI_NUM)) {
+			if ($row[1] == 0) continue;
+			$cur += $row[0]/$row[1];
+			if ($i % $mod_val == 0) {
+				$data[] = round($cur / $mod_val, 3);
+				$cur = 0;
+			}
+			$i++;
 		}
-		$stmt->close();
 
 		return json_encode($data);
 	}

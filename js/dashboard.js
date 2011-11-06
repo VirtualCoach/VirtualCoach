@@ -42,25 +42,19 @@ $(document).ready(function() {
 		series : []
    };
    
-	$.get('api/get_data.php?uid='+glob_uid, function(data) {
+	$.get('api/endpoint.php?uid='+glob_uid+'&m=single&col1=power&col2=power&points=20', function(data) {
 	    // Iterate over the lines and add categories or series
+		data = jQuery.parseJSON(data);
+	
 		var series = {
 			name: "Hello",
 		    data: []
 		};
-		
-		var curr = 0;
-		var n = 1;
-		
-	    $.each(data, function(e, k) {
-			if (!isNaN(parseFloat(k))) {
-				curr += parseFloat(k);
+				
+	    $.each(data, function(key, val) {
+			if (!isNaN(parseFloat(val))) {
+				series.data.push(parseFloat(val));
 			}
-			if (n % 15  == 0) {
-				series.data.push(parseFloat(curr) / 15);
-				curr = 0;
-			}
-			n++;
 		});
 		
 		options.series.push(series);

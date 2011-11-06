@@ -63,6 +63,25 @@ class Mysql {
 		//$this->updateActivity("New user added: <a href='../#!/profile/".$id."'>".$name."</a>");
 		return $res;
 	}
+	
+	public function add_info($uid, $age, $weight, $height, $years) {
+		global $mysqli;
+		$stmt = $mysqli->prepare("UPDATE users SET age = ?, weight = ?, height = ?, years = ? WHERE id = ?");
+		$stmt->bind_param("iddii", $age, $weight, $height, $years, $uid);
+		$stmt->execute();
+		$res = "success";
+		if($stmt->affected_rows != 1) {
+			$stmt2 = $mysqli->prepare("SELECT id FROM users WHERE email = ? LIMIT 1");
+			$stmt2->bind_param("s", $email);
+			$stmt2->execute();
+			$stmt2->store_result();
+			$res = $stmt2->num_rows == 1 ? "uid" : "unknown";
+			$stmt2->close();
+		}
+		$stmt->close();
+		//$this->updateActivity("New user added: <a href='../#!/profile/".$id."'>".$name."</a>");
+		return $res;
+	}
 }
 
 ?>

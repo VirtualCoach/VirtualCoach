@@ -15,8 +15,7 @@ jQuery(function(){
                 '<span class="qq-upload-size"></span>' +
                 '<a class="qq-upload-cancel" href="#">Cancel</a>' +
                 '<span class="qq-upload-failed-text">Failed</span>' +
-            '</li>',        
-
+            '</li>',
         classes: {
             // used to get elements from templates
             button: 'qq-upload-button',
@@ -33,6 +32,9 @@ jQuery(function(){
             // used in css to hide progress spinner
             success: 'qq-upload-success',
             fail: 'qq-upload-fail'
-        }
+        },
+		onComplete: function(id, fileName, responseJSON){
+			$("#myfile").val(responseJSON.success);
+		},
     });           
 });

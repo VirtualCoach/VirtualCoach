@@ -54,6 +54,21 @@ class User {
 		}
 	}
 	
+	public function add_user_info($age, $weight, $height, $years) {
+		$mysql = new Mysql();
+		
+		$user_info = $mysql->add_info($_SESSION['uid'], $age, $weight, $height, $years);
+		
+		if ($user_info == "success") {
+			$this->unset_error();
+			return true;
+		} else {
+			$this->set_error($user_info);
+			return false;
+		}
+		
+	}
+	
 	public function log_out() {
 		if(isset($_SESSION['status'])) {
 			unset($_SESSION['status']);

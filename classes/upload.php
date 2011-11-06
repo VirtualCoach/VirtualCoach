@@ -1,7 +1,7 @@
 <?php
 
 require_once("../api/CSV_Handler.php");
-$csvh = new CSV_Handler();
+@$csvh = new CSV_Handler();
 
 /**
  * Handle file uploads via XMLHttpRequest
@@ -25,11 +25,8 @@ class qqUploadedFileXhr {
         fseek($temp, 0, SEEK_SET);
         stream_copy_to_stream($temp, $target);
         fclose($target);
+
 		return true;
-		/*if ($csvh->validate($target)) {
-			return true;
-		}
-        return false;*/
     }
     function getName() {
         return $_GET['qqfile'];
@@ -87,7 +84,7 @@ class qqFileUploader {
         }
     }
     
-    private function checkServerSettings(){        
+    private function checkServerSettings(){ // need to fix    
         return;
 		$postSize = $this->toBytes(ini_get('post_max_size'));
         $uploadSize = $this->toBytes(ini_get('upload_max_filesize'));        
@@ -97,6 +94,16 @@ class qqFileUploader {
             die("{'error':'increase post_max_size and upload_max_filesize to $size'}");    
         }        
     }
+
+	private function genRandomString() {
+		$length = 8;
+		$characters = "0123456789abcdefghijklmnopqrstuvwxyz";
+		$string = '';    
+		for ($p = 0; $p < $length; $p++) {
+			$string .= $characters[mt_rand(0, strlen($characters))];
+		}
+		return $string;
+	}
     
     private function toBytes($str){
         $val = trim($str);
@@ -113,6 +120,7 @@ class qqFileUploader {
      * Returns array('success'=>true) or array('error'=>'error message')
      */
     function handleUpload($uploadDirectory, $replaceOldFile = FALSE){
+		global $csvh;
         if (!is_writable($uploadDirectory)){
             return array('error' => "Server error. Upload directory isn't writable.");
         }
@@ -148,13 +156,14 @@ class qqFileUploader {
             }
         }
         
+		$filename .= "-".$this->genRandomString()."-".time();
+
         if ($this->file->save($uploadDirectory . $filename . '.' . $ext)){
-			return array('success'=>true);
-			/*if ($csvh->validate($filename . '.' . $ext)) {
-				return array('success'=>true);
+			if ($res = $csvh->validate($filename . '.' . $ext) === "success") {
+				return array('success' => $filename . '.' . $ext);
 			} else {
-				return array('error' => 'File has an invalid format.');
-			}*/
+				return array('error' => $res);
+			}
             
         } else {
             return array('error'=> 'Could not save uploaded file.' .

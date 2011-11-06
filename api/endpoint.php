@@ -1,19 +1,34 @@
 <?php
 
+/*
+Documentation:
+
+call enpoint.php with the following GET params
+
+m = single | multiple
+p = first column name (used for single)
+q = second column name
+n = number of points to aggregate
+
+*/
+
 require_once("api.php");
 
-$api = new API();
+$uids = filter_var($_GET['uid'], FILTER_SANITIZE_NUMBER_INT);
 
-$method = filter_var($_GET['method'], FILTER_SANITIZE_STRING);
-$p = filter_var($_GET['p'], FILTER_SANITIZE_STRING);
-$q = filter_var($_GET['q'], FILTER_SANITIZE_STRING);
+$api = new API($uids);
 
-switch ($method) {
+$m = filter_var($_GET['m'], FILTER_SANITIZE_STRING);
+$col1 = filter_var($_GET['p'], FILTER_SANITIZE_STRING);
+$col2 = filter_var($_GET['q'], FILTER_SANITIZE_STRING);
+$points = filter_var($_GET['n'], FILTER_SANITIZE_NUMBER_INT);
+
+switch ($m) {
 	case "single":
-		echo $api->getSingleMetric($p);
+		echo $api->getSingleMetric($col1, $points);
 		break;
 	case "multiple":
-		echo $api->getMetricOverMetric($p, $q);
+		echo $api->getMetricOverMetric($col1, $col2, $points);
 		break;
 }
 
