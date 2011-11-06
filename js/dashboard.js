@@ -22,7 +22,7 @@ $(document).ready(function() {
       tooltip: {
          formatter: function() {
                    return ''+
-               this.x +': '+ this.y +' power';
+               this.y +' power';
          }
       },
 	  legend: {
@@ -46,7 +46,7 @@ $(document).ready(function() {
 	    // Iterate over the lines and add categories or series
 		var series = {
 			name: "Hello",
-		    data: []//[300, 400, 300, 500]
+		    data: []
 		};
 		
 		var curr = 0;

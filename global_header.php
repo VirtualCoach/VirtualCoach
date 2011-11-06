@@ -35,6 +35,7 @@
 				<a class="brand" href="./">Virtual Coach</a>
 				<ul class="nav">
 					<?php if ($page == "home") { echo "<li class='active'>";} else { echo "<li>"; } ?><a href="./">Home</a></li>
+					<?php if ($page == "pricing") { echo "<li class='active'>";} else { echo "<li>"; } ?><a href="pricing">Pricing</a></li>
 					<?php if ($page == "about") { echo "<li class='active'>";} else { echo "<li>"; } ?><a href="about">About</a></li>
 					<?php if ($page == "contact") { echo "<li class='active'>";} else { echo "<li>"; } ?><a href="contact">Contact</a></li>
 				</ul>

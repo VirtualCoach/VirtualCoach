@@ -13,9 +13,9 @@ require("global_header.php");
 			<div id="home_chart" style="width: 100%; height: 400px"></div>
 		</div>
 		<div class="span6 pull-right">
-			<h2>Training predictions adapted to <i>your</i> workout history</h2>
-			<p>Virtual Coach provides personalized training recommendations and is the easiest way to get advice and predictions to deliver real results.</p>
-			<p><a href="signup" class="btn large success">Sign Up Now &raquo;</a></p>
+			<h2>Training predictions adapted to <i>your</i> workout history</h2><br />
+			<p>Virtual Coach provides personalized training recommendations and is the easiest way to get advice and predictions to deliver real results.</p><br />
+			<p><a href="signup" class="btn large success pull-left">Sign Up Now &raquo;</a></p>
 		</div>
 		<div class="clearfix"></div>
       </div>

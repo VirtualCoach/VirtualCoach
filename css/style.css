@@ -28,6 +28,13 @@ p.psmall {
 	font-size:1.1em;
 }
 
+.pricing {
+	background:#fff;
+	border-radius:7px;
+	text-align:center;
+	padding: 20px 0;
+}
+
 a#logo {
 	padding-left: 80px;
 	padding-top:20px;
