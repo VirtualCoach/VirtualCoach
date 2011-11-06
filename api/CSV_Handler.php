@@ -63,9 +63,8 @@ class CSV_Handler {
 
 		return true; # got this far -> success!
 	}
-
+	
 	function validate($filename) {
-
 		$fh = fopen(dirname(__FILE__)."/../classes/uploads/".$filename, "r");
 		if (!$fh) {
 			return "filenotfound";
@@ -77,11 +76,14 @@ class CSV_Handler {
 				break;
 			}
 		}
-		$categories = get_csv($line);
+		$categories = str_getcsv($line);
 		$num_cols = count($categories);
 		$counts = array("secs" => 0, "kph" => 0, "rpm" => 0, "watts" => 0, "hr" => 0);
+		$positions = array(0, 0, 0, 0, 0);
 
-		# check categoriy validity
+		# check category validity
+		$pos_iter = 0;
+		$pos_arr_pos = 0;
 		foreach ($categories as $cat) {
 			$temp = $cat;
 			if (strcmp($temp, "mph") == 0 or strcmp($temp, "speed") == 0) {
@@ -90,10 +92,14 @@ class CSV_Handler {
 			if (strcmp($temp, "t") == 0 or strcmp($temp, "time") == 0 or strcmp($temp, "sec") == 0) {
 				$temp = "secs";
 			}
-			$counts[$temp]++;
+			if (array_key_exists($temp, $counts)) {
+				$counts[$temp]++;
+				$positions[$pos_arr_pos++] = $pos_iter;
+			}
+			$pos_iter++;
 		}
-		
-		if ($categories["secs"] != 1) return "invalidheader";
+	
+		if ($counts["secs"] != 1) return "invalidheader";
 		foreach ($counts as $cat_count) {
 			if ($cat_count > 1) {
 				return "invalidheader";
@@ -107,12 +113,14 @@ class CSV_Handler {
 			if ($line == "\n" or $line == "\r\n") continue;
 
 			$data = str_getcsv($line);
+			$pos = 0;
 			foreach ($data as $item) {
-				if (!is_numeric($item)) {
+				if (in_array($pos, $positions) and !is_numeric($item)) {
 					return "invaliddata";
 				}
+				$pos++;
 			}
-			
+		
 			# fail if not all lines have the same number of list elements
 			if (count($data) != $num_cols) {
 				return "invalidformat";
