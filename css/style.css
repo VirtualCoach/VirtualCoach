@@ -46,6 +46,10 @@ a#logo {
 	float: left;
 }
 
+.btn.huge {
+	font-size:1.3em;
+}
+
 input.error {
 	outline:0;
 	border-color:#EE5F5B;

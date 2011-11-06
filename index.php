@@ -15,7 +15,7 @@ require("global_header.php");
 		<div class="span6 pull-right">
 			<h2>Training predictions adapted to <i>your</i> workout history</h2><br />
 			<p>Virtual Coach provides personalized training recommendations and is the easiest way to get advice and predictions to deliver real results.</p><br />
-			<p><a href="signup" class="btn large success pull-left">Sign Up Now &raquo;</a></p>
+			<p><a href="signup" class="btn large huge success pull-left">Sign Up Now &raquo;</a></p>
 		</div>
 		<div class="clearfix"></div>
       </div>

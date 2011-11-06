@@ -57,7 +57,7 @@ $(document).ready(function() {
 				curr += parseFloat(k);
 			}
 			if (n % 15  == 0) {
-				series.data.push(parseFloat(curr));
+				series.data.push(parseFloat(curr) / 15);
 				curr = 0;
 			}
 			n++;
