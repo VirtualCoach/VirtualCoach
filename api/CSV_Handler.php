@@ -72,8 +72,33 @@ class CSV_Handler {
 		}
 
 		$had_data = false;
-		$line = fgets($fh);
-		$num_cols = count(str_getcsv($line));
+		while (($line = fgets($fh)) !== false) {
+			if ($line != "\n" and $line != "\r\n") {
+				break;
+			}
+		}
+		$categories = get_csv($line);
+		$num_cols = count($categories);
+		$counts = array("secs" => 0, "kph" => 0, "rpm" => 0, "watts" => 0, "hr" => 0);
+
+		# check categoriy validity
+		foreach ($categories as $cat) {
+			$temp = $cat;
+			if (strcmp($temp, "mph") == 0 or strcmp($temp, "speed") == 0) {
+				$temp = "kph";
+			}
+			if (strcmp($temp, "t") == 0 or strcmp($temp, "time") == 0 or strcmp($temp, "sec") == 0) {
+				$temp = "secs";
+			}
+			$counts[$temp]++;
+		}
+		
+		if ($categories["secs"] != 1) return "invalidheader";
+		foreach ($counts as $cat_count) {
+			if ($cat_count > 1) {
+				return "invalidheader";
+			}
+		}
 
 		while (($line = fgets($fh)) !== false) {
 			$had_data = true;
@@ -82,6 +107,12 @@ class CSV_Handler {
 			if ($line == "\n" or $line == "\r\n") continue;
 
 			$data = str_getcsv($line);
+			foreach ($data as $item) {
+				if (!is_numeric($item)) {
+					return "invaliddata";
+				}
+			}
+			
 			# fail if not all lines have the same number of list elements
 			if (count($data) != $num_cols) {
 				return "invalidformat";
