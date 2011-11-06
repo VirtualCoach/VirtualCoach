@@ -13,7 +13,30 @@ class CSV_Handler {
 			return false;
 		}
 
+    $index_hash = array("secs" => 0, "kph" => 0, "rpm" => 0, "watts" => 0, "hr" => 0);
+    $speed_metric = true;
+    define("KM_MI_RATIO", 1.609344);
+
 		$line = fgets($fh);
+		$cols = preg_split(",", $line);
+		for ($i = 0; $i < count($cols); $i++) {
+		  $col = str_replace("\"", "", $cols[$i]);
+
+		  # standardize time labels
+		  if (in_array($col, array("t", "sec", "time"))) $col = "secs";
+		  
+		  # standardize speed units
+		  if (strcmp($col, "mph") == 0) {
+		    $col = "kph";
+		    $speed_metric = false;
+		  }
+		  if (strcmp($col, "speed") == 0) $col = "kph"; # metric by default
+
+		  if (array_key_exists($col, $index_hash)) {
+		    $index_hash[$col] = $i;
+		  }
+		}
+		
 		$data = array();
 
 		while (($line = fgets($fh)) !== false) {
@@ -25,11 +48,12 @@ class CSV_Handler {
 		$stmt = $mysqli->prepare("INSERT INTO data (uid, t, rpm, power, speed, hr) VALUES (?, ?, ?, ?, ?, ?)");
 
 		foreach ($data as $entry) {
-			$t = $entry[0];
-			$speed = $entry[1];
-			$rpm = $entry[2];
-			$power = $entry[3];
-			$hr = $entry[4];
+			$t = $entry[$index_hash["secs"]];
+			$speed = $speed_metric ? $entry[$index_hash["kph"]]
+			                       : $entry[$index_hash["kph"]] * KM_MI_RATIO;
+			$rpm = $entry[$index_hash["rpm"]];
+			$power = $entry[$index_hash["power"]];
+			$hr = $entry[$index_hash["hr"]];
 
 			$stmt->bind_param('iddddd', $uid, $t, $rpm, $power, $speed, $hr);
 			if (!$stmt->execute()) {
