@@ -36,5 +36,11 @@ jQuery(function(){
 		onComplete: function(id, fileName, responseJSON){
 			$("#myfile").val(responseJSON.success);
 		},
-    });           
+    }); 
+
+    $("#sample_data_button").click(function() {
+		$("#myfile").val("ptap.csv");
+		$(this).removeClass("info");
+		$(this).addClass("success");
+	});
 });

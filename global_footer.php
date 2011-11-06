@@ -2,7 +2,7 @@
 	<footer>
 		<div class="row">
 	    	<div class="span4">
-				<h4>Virtual Coach</h4>
+				<h4>InSight</h4>
 				<ul class="unstyled">
 					<li><a href="./">Home</a></li>
 					<li><a href="pricing">Pricing</a></li>
@@ -31,7 +31,7 @@
 				</ul>
 			</div>
 			<div class="span4">
-				<p>&copy; Virtual Coach <?php echo date("Y"); ?>.</p>
+				<p>&copy; InSight <?php echo date("Y"); ?>.</p>
 			</div>
 		</div>
 	</footer>

@@ -62,9 +62,9 @@ require("global_header.php");
 				</div>
 			</div>
 			<div class="span-one-third pull-right">
-				<div class="sample_data">
+				<a id="sample_data_button" class="btn info large">
 					...or Use Sample Data
-				</div>
+				</a>
 			</div>
 			<div class="clearfix"></div>
         </div>

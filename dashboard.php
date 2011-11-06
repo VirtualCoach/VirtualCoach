@@ -1,5 +1,12 @@
 <?php 
 
+require_once("classes/User.php");
+$user = new User();
+
+if (!$user->is_logged_in()) {
+	header("Location: .");
+}
+
 $title = "Dashboard";
 $page = "dashboard";
 
@@ -54,14 +61,14 @@ require("global_header.php");
 		</div>
 		
 		<div class="well">
-			<div class="span4 bgwhite numerics pull-left">
-				<h1 class="pull-right"><small>Target Cadence</small> 80</h1>
-				<h1 class="pull-right"><small>Unfinished Goals</small> 22</h1>
-				<h1 class="pull-right"><small>Avg. Heart rate</small> 128</h1><br /><br />
-				<h1 class="pull-right"><small>RPM</small> 62</h1><br />
+			<h2 class="pull-left">Rider Profile</h2>
+			<a href="#" class="btn large success pull-right">Add Goal</a>
+			<div class="span4 bgwhite numerics pull-left clearleft">
+				<h1 class="pull-right" style="color:#C43C35;"><small>Target Power</small> 515</h1>
+				<h1 class="pull-right" style="color:#57A957;"><small>Target RPM</small> 97</h1>
+				<h1 class="pull-right" style="color:#57A957;"><small>Sprint RPM</small> 108</h1><br /><br />
+				<h1 class="pull-right"><small>Target HR</small> 185</h1><br />
 				<div class="clearfix"></div>
-				<br />
-				<a href="#" class="btn large success pull-right fullwidth">Add Goal</a>
 			</div>
 			<div class="span10 pull-right">
 				<div class="row">

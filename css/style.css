@@ -20,14 +20,24 @@ header a:hover {
 	text-decoration:none;
 }
 
+a.brand {
+	background:url(../img/logo_2.png) no-repeat 0px 5px !important;
+	padding-left:52px !important;
+}
+
 .bgwhite {
 	background: white;
 }
 
 .numerics {
 	padding:15px;
+	margin-top:38px;
 	border-radius:7px;
 	border: 1px solid #ddd;
+}
+
+.clearleft {
+	clear:left;
 }
 
 .fullwidth {
@@ -78,6 +88,13 @@ footer {
 	border-top: 1px solid #AAA;
 }
 
+.home_boxes .span-one-third {
+	text-align:center;
+}
+
+.home_boxes .span-one-third p {
+	padding: 10px 10px;
+}
 
 .qq-uploader { position:relative; width: 100%;}
 

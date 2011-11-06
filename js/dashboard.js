@@ -105,7 +105,7 @@ $(document).ready(function() {
 			 backgroundColor: '#F5F5F5'
 	      },
 	      title: {
-			text: "Rider Profile"
+			text: ""
 		  },
 	      xAxis: {
 	         title: {
@@ -136,7 +136,7 @@ $(document).ready(function() {
 	         }
 	      },
 		  exporting: {
-			 enabled: true
+			 enabled: false
 		  },
 			series : [{
 				data: [0, 0, 0, 0]

@@ -1,5 +1,12 @@
 <?php 
 
+require_once("classes/User.php");
+$user = new User();
+
+if ($user->is_logged_in()) {
+	header("Location: dashboard");
+}
+
 $title = "Training predictions adapted to your workout history";
 $page = "home";
 
@@ -13,8 +20,8 @@ require("global_header.php");
 			<div id="home_chart" style="width: 100%; height: 400px"></div>
 		</div>
 		<div class="span6 pull-right">
-			<h2>Training predictions adapted to <i>your</i> workout history</h2><br />
-			<p>Virtual Coach provides personalized training recommendations and is the easiest way to get advice and predictions to deliver real results.</p><br />
+			<h2>Performance Enhancing Software</h2><br />
+			<p>InSight provides personalized training recommendations and is the easiest way to get advice and predictions to deliver real results.</p><br />
 			<p><a href="signup" class="btn large huge success pull-left">Sign Up Now &raquo;</a></p>
 		</div>
 		<div class="clearfix"></div>
@@ -23,17 +30,20 @@ require("global_header.php");
       <!-- Example row of columns -->
       <div class="row home_boxes">
         <div class="span-one-third">
-          <h2>What?</h2>
-          <p>Virtual Coach provides personalized training recommendations for professional and amateur cyclists. It aims to deliver succinct and functional training advice and predictions to deliver real results.</p>
+          <h2>The InSight Blog</h2>
+          <p>Check out our blog for the latest updates.</p>
+		  <img src="img/blog.png" width="100px" />
         </div>
         <div class="span-one-third">
-          <h2>How?</h2>
-           <p>Training predictions are adapted from your workout history, which is collected on your bicycle in real time via your Power Meter device. Metrics are presented in a convenient and easy to understand format, while predictions are generated based on a sophisticated machine learning algorithm.</p>
+          <h2>Training Predictions</h2>
+           <p>Our algorithm learns from your workout history to give you the best results.</p>
+			<img src="img/algo.png" width="100px" />
        </div>
         <div class="span-one-third">
-          <h2>Why?</h2>
-          <p>Personal trainers are expensive and typically are not well-qualified. See real results at a lower cost simply by interacting with Virtual Coach. Join this exciting network of cyclists and change your cycling today.</p>
-          <p><a class="btn" href="signup">Sign Up &raquo;</a></p>
+          <h2>NEW: Goals</h2>
+          <p>Create fitness or result-based goals <br />using our predictions.</p>
+			<img src="img/goals.png" width="100px" />
+          <!--<p><a class="btn" href="signup">Sign Up &raquo;</a></p>-->
         </div>
       </div>
 <?php require("global_footer.php"); ?>

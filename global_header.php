@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Virtual Coach | <?php echo $title; ?></title>
+    <title>InSight | <?php echo $title; ?></title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -32,7 +32,7 @@
 	<div class="topbar">
 		<div class="fill">
 			<div class="container">
-				<a class="brand" href="./">Virtual Coach</a>
+				<a class="brand" href="./">InSight</a>
 				<ul class="nav">
 					<?php if ($page == "home") { echo "<li class='active'>";} else { echo "<li>"; } ?><a href="./">Home</a></li>
 					<?php if ($page == "pricing") { echo "<li class='active'>";} else { echo "<li>"; } ?><a href="pricing">Pricing</a></li>
