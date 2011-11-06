@@ -30,6 +30,12 @@ switch ($m) {
 	case "multiple":
 		echo $api->getMetricOverMetric($col1, $col2, $points);
 		break;
+	case "getmmp":
+		echo $api->getPowerCol("mmp", $points);
+		break;
+	case "x_mmp":
+		echo $api->getPowerCol($col1, $points);
+		break;
 }
 
 ?>

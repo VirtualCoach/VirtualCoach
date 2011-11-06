@@ -62,6 +62,32 @@ class API {
 
 		return json_encode($data);
 	}
+	
+	public function getPowerCol($colname, $points) {
+		global $mysqli;
+		
+		$data = array();
+		$stmt = $mysqli->prepare("SELECT ".$colname." FROM rider_power_profile WHERE uid = ?");
+		$stmt->bind_param("i", $this->uid);
+		$stmt->execute();
+		$stmt->store_result();
+		$mod_val = $stmt->num_rows / $points;
+		$stmt->bind_result($br);
+		
+		$i = 1;
+		$cur = 0;
+		while ($stmt->fetch()) {
+			$cur += $br;
+			if ($i % $mod_val == 0) {
+				$data[] = round($cur/$mod_val, 3);
+				$cur = 0;
+			}
+			$i++;
+		}
+		$stmt->close();
+
+		return json_encode($data);
+	}
 }
 
 ?>

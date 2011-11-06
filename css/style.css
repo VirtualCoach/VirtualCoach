@@ -24,6 +24,17 @@ header a:hover {
 	background: white;
 }
 
+.numerics {
+	padding:15px;
+	border-radius:7px;
+	border: 1px solid #ddd;
+}
+
+.fullwidth {
+	width: 85%;
+	text-align:center;
+}
+
 p.psmall {
 	font-size:1.1em;
 }
@@ -48,6 +59,11 @@ a#logo {
 
 .btn.huge {
 	font-size:1.3em;
+}
+
+.hero-unit.dash {
+	padding: 15px;
+	background-color: #fff;
 }
 
 input.error {

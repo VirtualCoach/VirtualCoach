@@ -61,6 +61,9 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	var glob_uid = <?php echo $_SESSION["uid"]; ?>;
+	</script>
     
 <?php if ($e == 'login'): ?>
 	<div class="container">
